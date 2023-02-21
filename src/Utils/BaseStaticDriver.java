@@ -17,17 +17,19 @@ public class BaseStaticDriver {
 
         static    //  burayı sadece static yapınca dıger class larda bu altta yazılanlar sankı varmıs gıbı gozukucek, class lara metodu yazmasakta
         {
-            KalanOncekileriKapat();
-            Logger logger = Logger.getLogger("");
+            KalanOncekileriKapat();    //  Metod en altta
+
+            Logger logger = Logger.getLogger("");   // bu ve alttakı satır konsolda cıkan kırmızılıkların bazılarını kaldırıyor
             logger.setLevel(Level.SEVERE);
 
-         //   System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY,"true");
+            System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY,"true");  // consola yazılan gereksiz KIRMIZI bilgileri sessize aldı, gızledı
          //   System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
-            driver = new ChromeDriver();
-            //driver.manage().window().maximize(); // max
-            driver.manage().deleteAllCookies();  //
 
-            wait=new WebDriverWait(driver, Duration.ofSeconds(30));
+            driver = new ChromeDriver();
+            driver.manage().window().maximize();    //  ekran sayfasını  max  yapıyor
+            driver.manage().deleteAllCookies();
+
+            wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
             driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));    // sadece ana sayfa yüklenirken en başta
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));    // bütün webElement için geçerli
@@ -61,8 +63,8 @@ public class BaseStaticDriver {
 
 
 
-
-        public static void KalanOncekileriKapat() {
+                                                        //  run ıle acılan  chrome drıve , manuel ıle actıgımız   chrome  oluyor
+        public static void KalanOncekileriKapat() {   //  Daha once run ıle calıstırılmıs chromedrıver ları herseyı kapatıyor yanı pc hafızası temızlenıyor
 
             try {
                 Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe /T");
